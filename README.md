@@ -62,7 +62,7 @@ Or via `requirements.yml`:
 ```yaml
 ---
 roles:
-  - name: babidi34.netdata_agent
+  - name: babidi34.netdata-agent
     src: https://gitlab.com/babidi34/ansible-role-netdata-agent.git
     scm: git
     version: main
@@ -76,7 +76,7 @@ roles:
   hosts: all
   become: true
   roles:
-    - role: babidi34.netdata_agent
+    - role: babidi34.netdata-agent
       vars:
         claim_token: "your_netdata_cloud_token"
         claim_rooms: "your_room_id"
