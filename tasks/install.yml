@@ -1,0 +1,23 @@
+---
+
+- name: Check if Netdata service is already installed
+  stat:
+    path: /lib/systemd/system/netdata.service
+  register: netdata_service
+
+- name: Download the installation script
+  get_url:
+    url: https://my-netdata.io/kickstart.sh
+    dest: ~/kickstart.sh
+    mode: +x
+  when: not netdata_service.stat.exists
+
+- name: Install Netdata
+  command: ~/kickstart.sh --dont-wait
+  when: not netdata_service.stat.exists
+
+- name: Cleanup installation script
+  file:
+    path: ~/kickstart.sh
+    state: absent
+  when: not netdata_service.stat.exists
